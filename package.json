@@ -33,7 +33,7 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "https://fabroche.github.io/simple-todo-app",
+  "homepage": "https://fabroche.github.io/simple-todo-app/",
   "devDependencies": {
     "gh-pages": "^6.1.1"
   }
