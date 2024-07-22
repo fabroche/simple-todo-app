@@ -1,0 +1,21 @@
+.todoCounter {
+    font-size: 2.4rem;
+    text-align: center;
+    font-weight: 600;
+    transition: all .3s ease;
+}
+
+.todoCounter-text {
+transition: all .3s ease;
+}
+
+.todoCounter-text--max {
+    color: var(--primary);
+}
+.todoCounter--dark-mode {
+    color: var(--light);
+}
+
+.todoCounter--light-mode {
+    color: var(--dark);
+}
