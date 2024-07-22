@@ -11,19 +11,24 @@ function TodoProvider({children}) {
     const [searchValue, setSearchValue] = useState("");
     const [newTodoValue, setNewTodoValue] = useState("");
     const [isOpenModal, setIsOpenModal] = useState(false);
+    const [filterOptions, setFilterOptions] = useState({
+        all: true,
+        pending: false,
+        completed: false
+    })
+    const [filteredTodos, setFilteredTodos] = useState([]);
 
     // Estados derivados
     const totalTodos = todos.length
     const completedTodos = todos.filter(todo => todo.completed).length
-    const filteredTodos = todos.filter(todo => {
-        const todoText = todo.text.toLowerCase();
-        const searchText = searchValue.toLowerCase();
 
-        return todoText.includes(searchText)
-    })
 
     // DOM Elements
     const createTodoButton = document.querySelector('.createTodoButton');
+    const todoFilterAptionAll = document.querySelector('#todo-filter__option--all');
+    const todoFilterAptionPending = document.querySelector('#todo-filter__option--pending');
+    const todoFilterAptionCompleted = document.querySelector('#todo-filter__option--completed');
+
 
     // LocalStorage
     async function getTodosLocalStorage() {
@@ -50,17 +55,23 @@ function TodoProvider({children}) {
         // console.log(await getTodosLocalStorage())
     }, []);
 
-    // Save in localStorage todos
+    // Save in localStorage todos and update filteredTodos
     useEffect(() => {
         if (!loading) {
             localStorage.setItem('todos', JSON.stringify(todos))
         }
+        setFilteredTodos(getFilteredTodos())
     }, [todos])
 
     // Save in localStorage darkMode state
     useEffect(() => {
         localStorage.setItem('darkMode', JSON.stringify(darkMode))
     }, [darkMode]);
+
+    useEffect(() => {
+      setFilteredTodos(getFilteredTodos())
+    }, [searchValue]);
+
 
     // Funciones
     const handleToggleTodoCompleted = (text, completed) => {
@@ -87,6 +98,7 @@ function TodoProvider({children}) {
         setTodos(newTodos);
         setNewTodoValue('');
         createTodoButton.click()
+        todoFilterAptionAll.click()
     }
 
     const showAnimaion = (elementSelector, activeClassName) => {
@@ -98,6 +110,14 @@ function TodoProvider({children}) {
         }
     }
 
+    function getFilteredTodos() {
+        return todos.filter(todo => {
+            const todoText = todo.text.toLowerCase();
+            const searchText = searchValue.toLowerCase();
+
+            return todoText.includes(searchText)
+        })
+    }
 
     return (
         <TodoContext.Provider value={
@@ -108,6 +128,7 @@ function TodoProvider({children}) {
                 loading,
                 error,
                 filteredTodos,
+                setFilteredTodos,
                 totalTodos,
                 completedTodos,
                 searchValue,
@@ -116,6 +137,8 @@ function TodoProvider({children}) {
                 setNewTodoValue,
                 isOpenModal,
                 setIsOpenModal,
+                filterOptions,
+                setFilterOptions,
                 handleToggleTodoCompleted,
                 handleOnDeleteTodo,
                 handleOnCreateTodo,

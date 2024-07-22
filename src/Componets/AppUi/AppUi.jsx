@@ -9,6 +9,7 @@ import {CreateTodoForm} from "../CreateTodoForm/CreateTodoForm";
 import {TodoContext} from "../../Componets/TodoContext/todoContext";
 import Modal from "../Modal/Modal";
 import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
+import TodoFilter from "../TodoFilter/TodoFilter";
 
 function AppUi() {
 
@@ -28,6 +29,7 @@ function AppUi() {
                 <DarkModeBtn/>
             </div>
             <TodoSearch/>
+            <TodoFilter/>
             <TodoList>
                 {loading && [
                     <TodoItem key={1} text={"Loading..."}/>,

@@ -1,0 +1,44 @@
+.todo-filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.todo-filter__option {
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    transition: all .3s ease;
+}
+
+.todo-filter__option--dark-mode {
+    color: var(--light);
+    border: 1px solid var(--light);
+}
+
+.todo-filter__option--dark-mode:hover {
+    box-shadow: 2px 2px 0 2px var(--light);
+    transform: translateY(-4px);
+}
+
+.dark-mode--active {
+    box-shadow: 2px 2px 0 2px var(--light);
+    transform: translateY(-4px);
+}
+
+.todo-filter__option--light-mode {
+    color: var(--dark);
+    border: 1px solid var(--dark);
+}
+
+.todo-filter__option--light-mode:hover {
+    box-shadow: 2px 2px 0 2px var(--dark);
+    transform: translateY(-4px);
+}
+
+.light-mode--active {
+    box-shadow: 2px 2px 0 2px var(--dark);
+    transform: translateY(-4px);
+}
