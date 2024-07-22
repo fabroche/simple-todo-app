@@ -17,7 +17,7 @@ function CreateTodoForm() {
     return (
         <div className={"createTodoForm-container"}>
 
-            <div className={'createTodoForm__input-container'}>
+            <form className={'createTodoForm__input-container'} onSubmit={(e) => handleOnCreateTodo(e, newTodoValue)}>
 
                 <input
                     className={'createTodoForm-input'}
@@ -26,8 +26,10 @@ function CreateTodoForm() {
                     value={newTodoValue}
                     onChange={(e) => setNewTodoValue(e.target.value)}
                 />
-                <VscNewFile type="submit" className="createTodoForm-icon" onClick={(e) => handleOnCreateTodo(e, newTodoValue)}/>
-            </div>
+                <button type="submit">
+                <VscNewFile className="createTodoForm-icon" />
+                </button>
+            </form>
         </div>
     )
 }

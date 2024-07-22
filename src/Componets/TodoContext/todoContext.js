@@ -82,6 +82,7 @@ function TodoProvider({children}) {
     }
 
     const handleOnCreateTodo = (e, text) => {
+        e.preventDefault();
         const newTodos = [ {text, completed: false} ,...todos,];
         setTodos(newTodos);
         setNewTodoValue('');
