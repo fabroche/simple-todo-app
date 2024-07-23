@@ -28,7 +28,7 @@ function TodoProvider({children}) {
     const todoFilterAptionAll = document.querySelector('#todo-filter__option--all');
     const todoFilterAptionPending = document.querySelector('#todo-filter__option--pending');
     const todoFilterAptionCompleted = document.querySelector('#todo-filter__option--completed');
-
+    const rootContainer = document.querySelector('#root');
 
     // LocalStorage
     async function getTodosLocalStorage() {
@@ -139,6 +139,7 @@ function TodoProvider({children}) {
                 setIsOpenModal,
                 filterOptions,
                 setFilterOptions,
+                rootContainer,
                 handleToggleTodoCompleted,
                 handleOnDeleteTodo,
                 handleOnCreateTodo,

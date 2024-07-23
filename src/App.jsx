@@ -7,7 +7,7 @@ function App() {
 
     return (
         <TodoProvider>
-            <AppUi/>
+            <AppUi />
         </TodoProvider>
     )
 }

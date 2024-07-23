@@ -46,10 +46,10 @@ function AppUi() {
                         completed={todo.completed}
                     />
                 ))}
-
+                <CreateTodoButton/>
             </TodoList>
 
-            <CreateTodoButton/>
+
 
             {isOpenModal &&
                 (<Modal>

@@ -29,6 +29,7 @@ body {
     font-size: 1.6rem;
     font-family: 'Roboto', sans-serif;
     position: relative;
+    scrollbar-width: none;
 }
 
 .header {
@@ -37,9 +38,23 @@ body {
     max-width: 600px;
 }
 
+#root {
+    overflow-y: hidden;
+}
+
 .flex-container {
     display: flex;
     justify-content: center;
     align-items: baseline;
     gap: 6px;
+}
+
+.dark-mode {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.light-mode {
+    background-color: var(--light);
+    color: var(--dark);
 }

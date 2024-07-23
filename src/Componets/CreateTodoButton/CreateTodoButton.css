@@ -1,7 +1,7 @@
 .createTodoButton {
     position: absolute;
-    bottom: 5vh;
-    right: 5vh;
+    bottom: 18px;
+    right: 18px;
     z-index: 2;
     width: 42px;
     height: 42px;

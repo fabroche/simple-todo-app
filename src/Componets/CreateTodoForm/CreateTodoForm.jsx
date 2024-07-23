@@ -11,14 +11,15 @@ function CreateTodoForm() {
         newTodoValue,
         setNewTodoValue,
         handleOnCreateTodo,
+        darkMode
     } = useContext(TodoContext);
 
 
     return (
         <div className={"createTodoForm-container"}>
 
-            <form className={'createTodoForm__input-container'} onSubmit={(e) => handleOnCreateTodo(e, newTodoValue)}>
-
+            <form className={`createTodoForm__input-container ${darkMode ? 'createTodoForm__input-container--dark-mode' : 'createTodoForm__input-container--light-mode'}`} onSubmit={(e) => handleOnCreateTodo(e, newTodoValue)}>
+                <label htmlFor="createTodoForm__input"><h2>Crea un nuevo <span className="todoCounter-text--max">TODO</span></h2></label>
                 <input
                     className={'createTodoForm-input'}
                     type="text"
@@ -26,8 +27,10 @@ function CreateTodoForm() {
                     value={newTodoValue}
                     onChange={(e) => setNewTodoValue(e.target.value)}
                 />
-                <button type="submit">
-                <VscNewFile className="createTodoForm-icon" />
+                <button
+                    type="submit"
+                >
+                <VscNewFile className={`createTodoForm-icon`} />
                 </button>
             </form>
         </div>
