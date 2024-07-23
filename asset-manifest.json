@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/simple-todo-app/static/css/main.47beabd2.css",
+    "main.css": "/simple-todo-app/static/css/main.d2f18a9d.css",
     "main.js": "/simple-todo-app/static/js/main.474117d4.js",
     "index.html": "/simple-todo-app/index.html",
-    "main.47beabd2.css.map": "/simple-todo-app/static/css/main.47beabd2.css.map",
+    "main.d2f18a9d.css.map": "/simple-todo-app/static/css/main.d2f18a9d.css.map",
     "main.474117d4.js.map": "/simple-todo-app/static/js/main.474117d4.js.map"
   },
   "entrypoints": [
-    "static/css/main.47beabd2.css",
+    "static/css/main.d2f18a9d.css",
     "static/js/main.474117d4.js"
   ]
 }
