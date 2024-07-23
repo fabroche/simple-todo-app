@@ -25,6 +25,7 @@ function AppUi() {
     return (
         <div className={`app-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
             <div className="header flex-container">
+                <CreateTodoButton/>
                 <TodoCounter/>
                 <DarkModeBtn/>
             </div>
@@ -46,7 +47,6 @@ function AppUi() {
                         completed={todo.completed}
                     />
                 ))}
-                <CreateTodoButton/>
             </TodoList>
 
 
