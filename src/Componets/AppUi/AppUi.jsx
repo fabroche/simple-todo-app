@@ -14,23 +14,71 @@ import TodoFilter from "../TodoFilter/TodoFilter";
 function AppUi() {
 
     const {
+        // Dark Mode
         darkMode,
+        setDarkMode,
+        // Loading and Error States
         loading,
         error,
+        // TODOS
+        todos,
+        totalTodos,
         filteredTodos,
+        setFilteredTodo,
+        completedTodos,
+        handleOnDeleteTodo,
+        handleToggleTodoCompleted,
+        handleOnCreateTodo,
+        newTodoValue,
+        setNewTodoValue,
+        // Modal
         isOpenModal,
-        setIsOpenModal
+        setIsOpenModal,
+        showAnimaion,
+        // DOM Elements
+        rootContainer,
+        // Search
+        searchValue,
+        setSearchValue,
+        // Filters
+        filterOptions,
+        setFilterOptions
+
     } = useContext(TodoContext);
 
     return (
         <div className={`app-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
             <div className="header flex-container">
-                <CreateTodoButton/>
-                <TodoCounter/>
-                <DarkModeBtn/>
+                <CreateTodoButton
+                    isOpenModal={isOpenModal}
+                    setIsOpenModal={setIsOpenModal}
+                    showAnimaion={showAnimaion}
+                />
+                <TodoCounter
+                    completedTodos={completedTodos}
+                    totalTodos={totalTodos}
+                    loading={loading}
+                    error={error}
+                />
+                <DarkModeBtn
+                    darkMode={darkMode}
+                    rootContainer={rootContainer}
+                    setDarkMode={setDarkMode}
+                />
             </div>
-            <TodoSearch/>
-            <TodoFilter/>
+            <TodoSearch
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
+                darkMode={darkMode}
+            />
+            <TodoFilter
+                darkMode={darkMode}
+                filteredTodos={filteredTodos}
+                setFilteredTodos={setFilteredTodo}
+                todos={todos}
+                filterOptions={filterOptions}
+                setFilterOptions={setFilterOptions}
+            />
             <TodoList>
                 {loading && [
                     <TodoItem key={1} text={"Loading..."}/>,
@@ -45,15 +93,24 @@ function AppUi() {
                         key={todo.text}
                         text={todo.text}
                         completed={todo.completed}
+                        loading={loading}
+                        darkMode={darkMode}
+                        handleOnDeleteTodo={handleOnDeleteTodo}
+                        handleToggleTodoCompleted={handleToggleTodoCompleted}
                     />
                 ))}
             </TodoList>
 
 
-
             {isOpenModal &&
-                (<Modal>
-                        <CreateTodoForm/>
+                (
+                    <Modal>
+                        <CreateTodoForm
+                            darkMode={darkMode}
+                            handleOnCreateTodo={handleOnCreateTodo}
+                            newTodoValue={newTodoValue}
+                            setNewTodoValue={setNewTodoValue}
+                        />
                     </Modal>
                 )}
         </div>

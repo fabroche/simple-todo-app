@@ -1,14 +1,15 @@
 import './TodoItem.css';
 import {VscArchive} from "react-icons/vsc";
-import {TodoContext} from "../TodoContext/todoContext";
-import {useContext} from "react";
 
 function TodoItem({
                       text,
                       completed,
+                      darkMode,
+                      loading,
+                      handleToggleTodoCompleted,
+                      handleOnDeleteTodo
                   }) {
 
-    const {darkMode, loading, handleToggleTodoCompleted, handleOnDeleteTodo} = useContext(TodoContext);
 
     return (
         <li className={`todoItem ${darkMode ? 'todoItem--dark-mode' : 'todoItem--light-mode'} ${loading ? 'loading' : ''}`}>

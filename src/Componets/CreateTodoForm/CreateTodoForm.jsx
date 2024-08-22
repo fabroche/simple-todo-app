@@ -5,21 +5,22 @@ import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
 import {useContext} from "react";
 import {TodoContext} from "../TodoContext/todoContext";
 
-function CreateTodoForm() {
-
-    const {
-        newTodoValue,
-        setNewTodoValue,
-        handleOnCreateTodo,
-        darkMode
-    } = useContext(TodoContext);
+function CreateTodoForm({
+                            newTodoValue,
+                            setNewTodoValue,
+                            handleOnCreateTodo,
+                            darkMode
+                        }) {
 
 
     return (
         <div className={"createTodoForm-container"}>
 
-            <form className={`createTodoForm__input-container ${darkMode ? 'createTodoForm__input-container--dark-mode' : 'createTodoForm__input-container--light-mode'}`} onSubmit={(e) => handleOnCreateTodo(e, newTodoValue)}>
-                <label htmlFor="createTodoForm__input"><h2>Crea un nuevo <span className="todoCounter-text--max">TODO</span></h2></label>
+            <form
+                className={`createTodoForm__input-container ${darkMode ? 'createTodoForm__input-container--dark-mode' : 'createTodoForm__input-container--light-mode'}`}
+                onSubmit={(e) => handleOnCreateTodo(e, newTodoValue)}>
+                <label htmlFor="createTodoForm__input"><h2>Crea un nuevo <span
+                    className="todoCounter-text--max">TODO</span></h2></label>
                 <input
                     className={'createTodoForm-input'}
                     type="text"
@@ -30,7 +31,7 @@ function CreateTodoForm() {
                 <button
                     type="submit"
                 >
-                <VscNewFile className={`createTodoForm-icon`} />
+                    <VscNewFile className={`createTodoForm-icon`}/>
                 </button>
             </form>
         </div>

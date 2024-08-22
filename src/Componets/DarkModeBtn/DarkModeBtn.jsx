@@ -1,15 +1,11 @@
 import './DarkModeBtn.css';
 import {VscColorMode} from "react-icons/vsc";
-import {useContext} from "react";
-import {TodoContext} from "../TodoContext/todoContext";
 
-function DarkModeBtn() {
-
-    const {
-        darkMode,
-        setDarkMode,
-        rootContainer
-    } = useContext(TodoContext);
+function DarkModeBtn({
+                         darkMode,
+                         setDarkMode,
+                         rootContainer
+                     }) {
 
     function handleDarkMode() {
         setDarkMode(!darkMode)

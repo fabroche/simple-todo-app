@@ -1,12 +1,11 @@
 import './TodoSearch.css';
 import {VscGoToSearch} from "react-icons/vsc";
-import {useContext} from "react";
-import {TodoContext} from "../TodoContext/todoContext";
-import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
 
-function TodoSearch() {
-
-    const {searchValue, setSearchValue, darkMode} = useContext(TodoContext);
+function TodoSearch({
+                        searchValue,
+                        setSearchValue,
+                        darkMode
+                    }) {
 
     return (
         <div className="search-header">
