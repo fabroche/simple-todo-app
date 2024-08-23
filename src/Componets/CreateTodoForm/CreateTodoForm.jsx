@@ -1,10 +1,6 @@
 import './CreateTodoForm.css';
 import {VscNewFile} from "react-icons/vsc";
 
-import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
-import {useContext} from "react";
-import {TodoContext} from "../TodoContext/todoContext";
-
 function CreateTodoForm({
                             newTodoValue,
                             setNewTodoValue,

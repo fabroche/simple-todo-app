@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import './TodoFilter.css';
-import {TodoContext} from "../TodoContext/todoContext";
 
 function TodoFilter({
                         darkMode,

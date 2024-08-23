@@ -1,17 +1,17 @@
-import React, {useContext} from 'react';
-import './AppUi.css';
+import './App.css';
+
 import {TodoCounter} from "../TodoCounter/TodoCounter";
 import {DarkModeBtn} from "../DarkModeBtn/DarkModeBtn";
 import {TodoSearch} from "../TodoSearch/TodoSearch";
 import {TodoList} from "../TodoList/TodoList";
 import {TodoItem} from "../TodoItem/TodoItem";
 import {CreateTodoForm} from "../CreateTodoForm/CreateTodoForm";
-import {TodoContext} from "../../Componets/TodoContext/todoContext";
+import {useTodos} from "../UseTodos/useTodos";
 import Modal from "../Modal/Modal";
 import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
 import TodoFilter from "../TodoFilter/TodoFilter";
 
-function AppUi() {
+function App() {
 
     const {
         // Dark Mode
@@ -24,7 +24,7 @@ function AppUi() {
         todos,
         totalTodos,
         filteredTodos,
-        setFilteredTodo,
+        setFilteredTodos,
         completedTodos,
         handleOnDeleteTodo,
         handleToggleTodoCompleted,
@@ -44,7 +44,7 @@ function AppUi() {
         filterOptions,
         setFilterOptions
 
-    } = useContext(TodoContext);
+    } = useTodos();
 
     return (
         <div className={`app-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
@@ -74,17 +74,17 @@ function AppUi() {
             <TodoFilter
                 darkMode={darkMode}
                 filteredTodos={filteredTodos}
-                setFilteredTodos={setFilteredTodo}
+                setFilteredTodos={setFilteredTodos}
                 todos={todos}
                 filterOptions={filterOptions}
                 setFilterOptions={setFilterOptions}
             />
             <TodoList>
                 {loading && [
-                    <TodoItem key={1} text={"Loading..."}/>,
-                    <TodoItem key={2} text={"Loading..."}/>,
-                    <TodoItem key={3} text={"Loading..."}/>,
-                    <TodoItem key={4} text={"Loading..."}/>
+                    <TodoItem key={1} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
+                    <TodoItem key={2} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
+                    <TodoItem key={3} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
+                    <TodoItem key={4} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
                 ]}
                 {error && <p>Critical Error</p>}
 
@@ -117,4 +117,4 @@ function AppUi() {
     )
 }
 
-export {AppUi};
+export default App;

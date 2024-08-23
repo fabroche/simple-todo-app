@@ -1,6 +1,4 @@
 import './CreateTodoButton.css';
-import {useContext} from "react";
-import {TodoContext} from "../TodoContext/todoContext";
 
 function CreateTodoButton({
                               isOpenModal,

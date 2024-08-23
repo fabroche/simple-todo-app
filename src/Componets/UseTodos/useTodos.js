@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-const TodoContext = React.createContext();
-
-function TodoProvider({children}) {
+function useTodos(props) {
     // Estados
     const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) || false);
     const [todos, setTodos] = useState([]);
@@ -69,7 +67,7 @@ function TodoProvider({children}) {
     }, [darkMode]);
 
     useEffect(() => {
-      setFilteredTodos(getFilteredTodos())
+        setFilteredTodos(getFilteredTodos())
     }, [searchValue]);
 
 
@@ -94,7 +92,7 @@ function TodoProvider({children}) {
 
     const handleOnCreateTodo = (e, text) => {
         e.preventDefault();
-        const newTodos = [ {text, completed: false} ,...todos,];
+        const newTodos = [{text, completed: false}, ...todos,];
         setTodos(newTodos);
         setNewTodoValue('');
         createTodoButton.click()
@@ -119,36 +117,30 @@ function TodoProvider({children}) {
         })
     }
 
-    return (
-        <TodoContext.Provider value={
-            {
-                darkMode,
-                setDarkMode,
-                todos,
-                loading,
-                error,
-                filteredTodos,
-                setFilteredTodos,
-                totalTodos,
-                completedTodos,
-                searchValue,
-                setSearchValue,
-                newTodoValue,
-                setNewTodoValue,
-                isOpenModal,
-                setIsOpenModal,
-                filterOptions,
-                setFilterOptions,
-                rootContainer,
-                handleToggleTodoCompleted,
-                handleOnDeleteTodo,
-                handleOnCreateTodo,
-                showAnimaion
-            }
-        }>
-            {children}
-        </TodoContext.Provider>
-    )
+    return {
+        darkMode,
+        setDarkMode,
+        todos,
+        loading,
+        error,
+        filteredTodos,
+        setFilteredTodos,
+        totalTodos,
+        completedTodos,
+        searchValue,
+        setSearchValue,
+        newTodoValue,
+        setNewTodoValue,
+        isOpenModal,
+        setIsOpenModal,
+        filterOptions,
+        setFilterOptions,
+        rootContainer,
+        handleToggleTodoCompleted,
+        handleOnDeleteTodo,
+        handleOnCreateTodo,
+        showAnimaion
+    }
 }
 
-export {TodoContext, TodoProvider}
+export {useTodos}
