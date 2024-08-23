@@ -10,6 +10,9 @@ import {useTodos} from "../UseTodos/useTodos";
 import Modal from "../Modal/Modal";
 import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
 import TodoFilter from "../TodoFilter/TodoFilter";
+import {TodosError} from "../TodosError/TodosError";
+import {TodosLoading} from "../TodosLoading/TodosLoading";
+import {EmptyTodos} from "../EmptyTodos/EmptyTodos";
 
 function App() {
 
@@ -79,16 +82,19 @@ function App() {
                 filterOptions={filterOptions}
                 setFilterOptions={setFilterOptions}
             />
-            <TodoList>
-                {loading && [
-                    <TodoItem key={1} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
-                    <TodoItem key={2} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
-                    <TodoItem key={3} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
-                    <TodoItem key={4} text={"Loading..."} loading={loading} darkMode={darkMode}/>,
-                ]}
-                {error && <p>Critical Error</p>}
 
-                {filteredTodos.map(todo => (
+            <TodoList
+                error={error}
+                loading={loading}
+                totalTodos={totalTodos}
+                filteredTodos={filteredTodos}
+                searchValue={searchValue}
+                onError={() => <TodosError/>}
+                onLoading={() => <TodosLoading darkMode={darkMode}/>}
+                onEmptyTodos={() => <EmptyTodos/>}
+                onEmptySearchResult={(searchValue) => <p>There is not coincidences for {searchValue}</p>}
+            >
+                {todo => (
                     <TodoItem
                         key={todo.text}
                         text={todo.text}
@@ -98,7 +104,7 @@ function App() {
                         handleOnDeleteTodo={handleOnDeleteTodo}
                         handleToggleTodoCompleted={handleToggleTodoCompleted}
                     />
-                ))}
+                )}
             </TodoList>
 
 
