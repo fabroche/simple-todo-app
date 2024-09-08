@@ -8,6 +8,7 @@ function DarkModeBtn({
                      }) {
 
     function handleDarkMode() {
+        console.log(darkMode)
         setDarkMode(!darkMode)
         if (darkMode) {
             rootContainer.classList.remove('dark-mode');

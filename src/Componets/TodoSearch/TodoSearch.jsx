@@ -4,7 +4,8 @@ import {VscGoToSearch} from "react-icons/vsc";
 function TodoSearch({
                         searchValue,
                         setSearchValue,
-                        darkMode
+                        darkMode,
+                        loading
                     }) {
 
     return (
@@ -16,6 +17,7 @@ function TodoSearch({
                     type={"text"}
                     value={searchValue}
                     onChange={(e) => setSearchValue(e.target.value)}
+                    disabled={loading}
                 />
                 <VscGoToSearch
                     type={"button"}

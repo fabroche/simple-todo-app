@@ -13,6 +13,9 @@ import TodoFilter from "../TodoFilter/TodoFilter";
 import {TodosError} from "../TodosError/TodosError";
 import {TodosLoading} from "../TodosLoading/TodosLoading";
 import {EmptyTodos} from "../EmptyTodos/EmptyTodos";
+import TodoHeader from "../TodoHeader/TodoHeader";
+import Layout from "../Layout/Layout";
+import {StorageChangeAlertWithStorageListener} from "../StorageChangeAlert/StorageChangeAlert";
 
 function App() {
 
@@ -26,6 +29,7 @@ function App() {
         // TODOS
         todos,
         totalTodos,
+        sincronize,
         filteredTodos,
         setFilteredTodos,
         completedTodos,
@@ -50,8 +54,8 @@ function App() {
     } = useTodos();
 
     return (
-        <div className={`app-container ${darkMode ? 'dark-mode' : 'light-mode'}`}>
-            <div className="header flex-container">
+        <Layout loading={loading} darkMode={darkMode}>
+            <TodoHeader>
                 <CreateTodoButton
                     isOpenModal={isOpenModal}
                     setIsOpenModal={setIsOpenModal}
@@ -60,7 +64,6 @@ function App() {
                 <TodoCounter
                     completedTodos={completedTodos}
                     totalTodos={totalTodos}
-                    loading={loading}
                     error={error}
                 />
                 <DarkModeBtn
@@ -68,7 +71,7 @@ function App() {
                     rootContainer={rootContainer}
                     setDarkMode={setDarkMode}
                 />
-            </div>
+            </TodoHeader>
             <TodoSearch
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
@@ -85,7 +88,6 @@ function App() {
 
             <TodoList
                 error={error}
-                loading={loading}
                 totalTodos={totalTodos}
                 filteredTodos={filteredTodos}
                 searchValue={searchValue}
@@ -99,13 +101,15 @@ function App() {
                         key={todo.text}
                         text={todo.text}
                         completed={todo.completed}
-                        loading={loading}
+                        // loading={loading}
                         darkMode={darkMode}
                         handleOnDeleteTodo={handleOnDeleteTodo}
                         handleToggleTodoCompleted={handleToggleTodoCompleted}
                     />
                 )}
             </TodoList>
+
+            <StorageChangeAlertWithStorageListener sincronize={sincronize}/>
 
 
             {isOpenModal &&
@@ -119,7 +123,7 @@ function App() {
                         />
                     </Modal>
                 )}
-        </div>
+        </Layout>
     )
 }
 

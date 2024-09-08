@@ -1,0 +1,23 @@
+.app-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.dark-mode {
+    background-color: var(--dark);
+    color: var(--light);
+}
+
+.light-mode {
+    background-color: var(--light);
+    color: var(--dark);
+}

@@ -6,6 +6,7 @@ function useTodos(props) {
     const [todos, setTodos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const [sincronizedItem, setSincronizedItem] = useState(true);
     const [searchValue, setSearchValue] = useState("");
     const [newTodoValue, setNewTodoValue] = useState("");
     const [isOpenModal, setIsOpenModal] = useState(false);
@@ -42,16 +43,18 @@ function useTodos(props) {
                 setLoading(true)
                 const response = await getTodosLocalStorage()
                 setTodos(response)
-                setLoading(false)
             } catch (error) {
                 setLoading(false)
                 setError(true)
+            } finally {
+                setLoading(false)
+                setSincronizedItem(true)
             }
         }
 
         getTodos()
         // console.log(await getTodosLocalStorage())
-    }, []);
+    }, [sincronizedItem]);
 
     // Save in localStorage todos and update filteredTodos
     useEffect(() => {
@@ -117,11 +120,16 @@ function useTodos(props) {
         })
     }
 
+    function sincronize() {
+        setSincronizedItem(false)
+    }
+
     return {
         darkMode,
         setDarkMode,
         todos,
         loading,
+        sincronize,
         error,
         filteredTodos,
         setFilteredTodos,

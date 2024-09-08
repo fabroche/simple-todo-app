@@ -33,6 +33,10 @@
     border: 1px solid var(--primary);
 }
 
+.todoSearch:disabled {
+        opacity: 25%;
+}
+
 .todoSearch--dark-mode {
     border: 1px solid var(--light);
 }
