@@ -74,6 +74,10 @@ input[type="checkbox"]:checked {
     display: none;
 }
 
+.disabled {
+    opacity: 30%;
+}
+
 @keyframes loading-skeleton {
     0%, 100% {
         opacity: 1;

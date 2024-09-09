@@ -85,12 +85,14 @@ function useTodos(props) {
     }
 
     const handleOnDeleteTodo = (text) => {
+
         const newTodos = [...todos]
         const todoIndex = newTodos.findIndex(
             todo => todo.text === text
         )
         newTodos.splice(todoIndex, 1)
         setTodos(newTodos)
+
     }
 
     const handleOnCreateTodo = (e, text) => {
@@ -129,6 +131,7 @@ function useTodos(props) {
         setDarkMode,
         todos,
         loading,
+        sincronizedItem,
         sincronize,
         error,
         filteredTodos,

@@ -1,0 +1,7 @@
+.update-storageChange-btn {
+    border: none;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration-line: underline;
+    background-color: transparent;
+}

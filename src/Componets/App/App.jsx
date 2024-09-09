@@ -30,6 +30,7 @@ function App() {
         todos,
         totalTodos,
         sincronize,
+        sincronizedItem,
         filteredTodos,
         setFilteredTodos,
         completedTodos,
@@ -90,6 +91,7 @@ function App() {
                 error={error}
                 totalTodos={totalTodos}
                 filteredTodos={filteredTodos}
+                sincronizedItems={sincronizedItem}
                 searchValue={searchValue}
                 onError={() => <TodosError/>}
                 onLoading={() => <TodosLoading darkMode={darkMode}/>}
@@ -103,14 +105,14 @@ function App() {
                         completed={todo.completed}
                         // loading={loading}
                         darkMode={darkMode}
+                        sincronizedItems={sincronizedItem}
                         handleOnDeleteTodo={handleOnDeleteTodo}
                         handleToggleTodoCompleted={handleToggleTodoCompleted}
                     />
                 )}
             </TodoList>
 
-            <StorageChangeAlertWithStorageListener sincronize={sincronize}/>
-
+            <StorageChangeAlertWithStorageListener sincronize={sincronize} handleOnDeleteTodo={handleOnDeleteTodo}/>
 
             {isOpenModal &&
                 (
