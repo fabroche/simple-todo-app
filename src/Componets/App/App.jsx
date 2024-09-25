@@ -16,43 +16,51 @@ import {EmptyTodos} from "../EmptyTodos/EmptyTodos";
 import TodoHeader from "../TodoHeader/TodoHeader";
 import Layout from "../Layout/Layout";
 import {StorageChangeAlertWithStorageListener} from "../StorageChangeAlert/StorageChangeAlert";
+import {useState} from "react";
+import {useDarkMode} from "../../Hooks/UseDarkMode/useDarkMode";
+import {useSearch} from "../../Hooks/UseSearch/useSearch";
 
 function App() {
 
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [isOpenModal, setIsOpenModal] = useState(false);
+
+    const {darkMode, setDarkMode} = useDarkMode()
+
     const {
-        // Dark Mode
-        darkMode,
-        setDarkMode,
-        // Loading and Error States
-        loading,
-        error,
-        // TODOS
         todos,
         totalTodos,
         sincronize,
         sincronizedItem,
-        filteredTodos,
-        setFilteredTodos,
         completedTodos,
         handleOnDeleteTodo,
         handleToggleTodoCompleted,
         handleOnCreateTodo,
         newTodoValue,
         setNewTodoValue,
-        // Modal
-        isOpenModal,
-        setIsOpenModal,
-        showAnimaion,
-        // DOM Elements
-        rootContainer,
-        // Search
+    } = useTodos({setLoading, setError});
+
+    const {
         searchValue,
         setSearchValue,
-        // Filters
+        filteredTodos,
+        setFilteredTodos,
         filterOptions,
         setFilterOptions
+    } = useSearch({todos, loading})
 
-    } = useTodos();
+    // DOM Elements
+    const rootContainer = document.querySelector('#root');
+
+    const showAnimaion = (elementSelector, activeClassName) => {
+        if (!isOpenModal) {
+            setTimeout(() => {
+                const elementToAnimate = document.querySelector(elementSelector);
+                elementToAnimate.classList.toggle(activeClassName);
+            }, 100);
+        }
+    }
 
     return (
         <Layout loading={loading} darkMode={darkMode}>
@@ -103,7 +111,6 @@ function App() {
                         key={todo.text}
                         text={todo.text}
                         completed={todo.completed}
-                        // loading={loading}
                         darkMode={darkMode}
                         sincronizedItems={sincronizedItem}
                         handleOnDeleteTodo={handleOnDeleteTodo}
@@ -112,7 +119,10 @@ function App() {
                 )}
             </TodoList>
 
-            <StorageChangeAlertWithStorageListener sincronize={sincronize} handleOnDeleteTodo={handleOnDeleteTodo}/>
+            <StorageChangeAlertWithStorageListener
+                sincronize={sincronize}
+                handleOnDeleteTodo={handleOnDeleteTodo}
+            />
 
             {isOpenModal &&
                 (

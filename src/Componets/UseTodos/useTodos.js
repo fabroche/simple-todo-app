@@ -1,21 +1,10 @@
 import React, {useEffect, useState} from "react";
 
-function useTodos(props) {
+function useTodos({setLoading, setError}) {
     // Estados
-    const [darkMode, setDarkMode] = useState(JSON.parse(localStorage.getItem('darkMode')) || false);
     const [todos, setTodos] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
     const [sincronizedItem, setSincronizedItem] = useState(true);
-    const [searchValue, setSearchValue] = useState("");
     const [newTodoValue, setNewTodoValue] = useState("");
-    const [isOpenModal, setIsOpenModal] = useState(false);
-    const [filterOptions, setFilterOptions] = useState({
-        all: true,
-        pending: false,
-        completed: false
-    })
-    const [filteredTodos, setFilteredTodos] = useState([]);
 
     // Estados derivados
     const totalTodos = todos.length
@@ -24,10 +13,7 @@ function useTodos(props) {
 
     // DOM Elements
     const createTodoButton = document.querySelector('.createTodoButton');
-    const todoFilterAptionAll = document.querySelector('#todo-filter__option--all');
-    const todoFilterAptionPending = document.querySelector('#todo-filter__option--pending');
-    const todoFilterAptionCompleted = document.querySelector('#todo-filter__option--completed');
-    const rootContainer = document.querySelector('#root');
+    const todoFilterActionAll = document.querySelector('#todo-filter__option--all');
 
     // LocalStorage
     async function getTodosLocalStorage() {
@@ -56,22 +42,9 @@ function useTodos(props) {
         // console.log(await getTodosLocalStorage())
     }, [sincronizedItem]);
 
-    // Save in localStorage todos and update filteredTodos
-    useEffect(() => {
-        if (!loading) {
-            localStorage.setItem('todos', JSON.stringify(todos))
-        }
-        setFilteredTodos(getFilteredTodos())
-    }, [todos])
 
-    // Save in localStorage darkMode state
-    useEffect(() => {
-        localStorage.setItem('darkMode', JSON.stringify(darkMode))
-    }, [darkMode]);
 
-    useEffect(() => {
-        setFilteredTodos(getFilteredTodos())
-    }, [searchValue]);
+
 
 
     // Funciones
@@ -101,25 +74,7 @@ function useTodos(props) {
         setTodos(newTodos);
         setNewTodoValue('');
         createTodoButton.click()
-        todoFilterAptionAll.click()
-    }
-
-    const showAnimaion = (elementSelector, activeClassName) => {
-        if (!isOpenModal) {
-            setTimeout(() => {
-                const elementToAnimate = document.querySelector(elementSelector);
-                elementToAnimate.classList.toggle(activeClassName);
-            }, 100);
-        }
-    }
-
-    function getFilteredTodos() {
-        return todos.filter(todo => {
-            const todoText = todo.text.toLowerCase();
-            const searchText = searchValue.toLowerCase();
-
-            return todoText.includes(searchText)
-        })
+        todoFilterActionAll.click()
     }
 
     function sincronize() {
@@ -127,30 +82,16 @@ function useTodos(props) {
     }
 
     return {
-        darkMode,
-        setDarkMode,
         todos,
-        loading,
         sincronizedItem,
         sincronize,
-        error,
-        filteredTodos,
-        setFilteredTodos,
         totalTodos,
         completedTodos,
-        searchValue,
-        setSearchValue,
         newTodoValue,
         setNewTodoValue,
-        isOpenModal,
-        setIsOpenModal,
-        filterOptions,
-        setFilterOptions,
-        rootContainer,
         handleToggleTodoCompleted,
         handleOnDeleteTodo,
         handleOnCreateTodo,
-        showAnimaion
     }
 }
 
