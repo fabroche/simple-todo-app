@@ -6,7 +6,7 @@ import {TodoSearch} from "../TodoSearch/TodoSearch";
 import {TodoList} from "../TodoList/TodoList";
 import {TodoItem} from "../TodoItem/TodoItem";
 import {CreateTodoForm} from "../CreateTodoForm/CreateTodoForm";
-import {useTodos} from "../UseTodos/useTodos";
+import {useTodos} from "../../Hooks/UseTodos/useTodos";
 import Modal from "../Modal/Modal";
 import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
 import TodoFilter from "../TodoFilter/TodoFilter";
