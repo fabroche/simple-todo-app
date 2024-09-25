@@ -1,27 +1,24 @@
-import React from 'react';
+import React, {useEffect, useReducer} from 'react';
 import './TodoFilter.css';
+import {actionTypes} from "../../Hooks/UseSearch/filterReducer";
 
 function TodoFilter({
                         darkMode,
-                        filterOptions,
-                        setFilterOptions,
                         todos,
-                        filteredTodos,
-                        setFilteredTodos
+                        setFilteredTodos,
+                        filterReducerState,
+                        filterDispatch
                     }) {
 
-    function filterTodos(filterName) {
-        if (filterName === 'all') {
-            setFilterOptions({all: true, pending: false, completed: false});
-            setFilteredTodos(todos);
-        } else if (filterName === 'pending') {
-            setFilterOptions({all: false, pending: true, completed: false});
-            setFilteredTodos(todos.filter(todo => !todo.completed));
-        } else if (filterName === 'completed') {
-            setFilterOptions({all: false, pending: false, completed: true});
-            setFilteredTodos(todos.filter(todo => todo.completed));
-        }
+    useEffect(() => {
+        setFilteredTodos(filterReducerState.filteredTodos)
+    }, [filterReducerState]);
 
+    function filterTodos(filterName) {
+        filterDispatch({
+            type: filterName,
+            payload: {todos}
+        })
     }
 
     return (
@@ -29,30 +26,30 @@ function TodoFilter({
             <button
                 id="todo-filter__option--all"
                 className={`todo-filter__option ${darkMode
-                    ? `todo-filter__option--dark-mode ${filterOptions.all ? 'dark-mode--active' : ''}`
-                    : `todo-filter__option--light-mode ${filterOptions.all ? 'light-mode--active' : ''}
+                    ? `todo-filter__option--dark-mode ${filterReducerState.all ? 'dark-mode--active' : ''}`
+                    : `todo-filter__option--light-mode ${filterReducerState.all ? 'light-mode--active' : ''}
                     `}`}
-                onClick={() => filterTodos('all')}
+                onClick={() => filterTodos(actionTypes.all)}
             >Todas
             </button>
 
             <button
                 id="todo-filter__option--pending"
                 className={`todo-filter__option ${darkMode
-                    ? `todo-filter__option--dark-mode ${filterOptions.pending ? 'dark-mode--active' : ''}`
-                    : `todo-filter__option--light-mode ${filterOptions.pending ? 'light-mode--active' : ''}
+                    ? `todo-filter__option--dark-mode ${filterReducerState.pending ? 'dark-mode--active' : ''}`
+                    : `todo-filter__option--light-mode ${filterReducerState.pending ? 'light-mode--active' : ''}
                     `}`}
-                onClick={() => filterTodos('pending')}
+                onClick={() => filterTodos(actionTypes.pending)}
             >Pendientes
             </button>
 
             <button
                 id="todo-filter__option--completed"
                 className={`todo-filter__option ${darkMode
-                    ? `todo-filter__option--dark-mode ${filterOptions.completed ? 'dark-mode--active' : ''}`
-                    : `todo-filter__option--light-mode ${filterOptions.completed ? 'light-mode--active' : ''}
+                    ? `todo-filter__option--dark-mode ${filterReducerState.completed ? 'dark-mode--active' : ''}`
+                    : `todo-filter__option--light-mode ${filterReducerState.completed ? 'light-mode--active' : ''}
                     `}`}
-                onClick={() => filterTodos('completed')}
+                onClick={() => filterTodos(actionTypes.completed)}
             >Completadas
             </button>
 

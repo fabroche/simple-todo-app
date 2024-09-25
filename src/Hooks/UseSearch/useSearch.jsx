@@ -1,14 +1,11 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
+import {initialState, reducer} from "./filterReducer";
 
 function useSearch({todos, loading}) {
     const [searchValue, setSearchValue] = useState("");
     const [filteredTodos, setFilteredTodos] = useState([]);
-    const [filterOptions, setFilterOptions] = useState({
-        all: true,
-        pending: false,
-        completed: false
-    })
 
+    const [filterReducerState, filterDispatch] = useReducer(reducer, {...initialState, filteredTodos: todos})
 
     useEffect(() => {
         setFilteredTodos(getFilteredTodos())
@@ -37,8 +34,8 @@ function useSearch({todos, loading}) {
         setSearchValue,
         filteredTodos,
         setFilteredTodos,
-        filterOptions,
-        setFilterOptions
+        filterReducerState,
+        filterDispatch
     };
 }
 

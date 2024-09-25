@@ -46,8 +46,8 @@ function App() {
         setSearchValue,
         filteredTodos,
         setFilteredTodos,
-        filterOptions,
-        setFilterOptions
+        filterReducerState,
+        filterDispatch
     } = useSearch({todos, loading})
 
     // DOM Elements
@@ -88,11 +88,10 @@ function App() {
             />
             <TodoFilter
                 darkMode={darkMode}
-                filteredTodos={filteredTodos}
-                setFilteredTodos={setFilteredTodos}
                 todos={todos}
-                filterOptions={filterOptions}
-                setFilterOptions={setFilterOptions}
+                setFilteredTodos={setFilteredTodos}
+                filterReducerState={filterReducerState}
+                filterDispatch={filterDispatch}
             />
 
             <TodoList
