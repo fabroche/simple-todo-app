@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './Componets/App/App';
+import {App} from "./Pages/App";
 
 const rootContainer = document.getElementById('root');
 const darkMode = JSON.parse(localStorage.getItem('darkMode')) || false;

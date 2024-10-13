@@ -1,26 +1,26 @@
-import './App.css';
+import './HomePage.css';
 
-import {TodoCounter} from "../TodoCounter/TodoCounter";
-import {DarkModeBtn} from "../DarkModeBtn/DarkModeBtn";
-import {TodoSearch} from "../TodoSearch/TodoSearch";
-import {TodoList} from "../TodoList/TodoList";
-import {TodoItem} from "../TodoItem/TodoItem";
-import {CreateTodoForm} from "../CreateTodoForm/CreateTodoForm";
+import {TodoCounter} from "../../Componets/TodoCounter/TodoCounter";
+import {DarkModeBtn} from "../../Componets/DarkModeBtn/DarkModeBtn";
+import {TodoSearch} from "../../Componets/TodoSearch/TodoSearch";
+import {TodoList} from "../../Componets/TodoList/TodoList";
+import {TodoItem} from "../../Componets/TodoItem/TodoItem";
+import {CreateTodoForm} from "../../Componets/CreateTodoForm/CreateTodoForm";
 import {useTodos} from "../../Hooks/UseTodos/useTodos";
-import Modal from "../Modal/Modal";
-import {CreateTodoButton} from "../CreateTodoButton/CreateTodoButton";
-import TodoFilter from "../TodoFilter/TodoFilter";
-import {TodosError} from "../TodosError/TodosError";
-import {TodosLoading} from "../TodosLoading/TodosLoading";
-import {EmptyTodos} from "../EmptyTodos/EmptyTodos";
-import TodoHeader from "../TodoHeader/TodoHeader";
-import Layout from "../Layout/Layout";
-import {StorageChangeAlertWithStorageListener} from "../StorageChangeAlert/StorageChangeAlert";
+import Modal from "../../Componets/Modal/Modal";
+import {CreateTodoButton} from "../../Componets/CreateTodoButton/CreateTodoButton";
+import TodoFilter from "../../Componets/TodoFilter/TodoFilter";
+import {TodosError} from "../../Componets/TodosError/TodosError";
+import {TodosLoading} from "../../Componets/TodosLoading/TodosLoading";
+import {EmptyTodos} from "../../Componets/EmptyTodos/EmptyTodos";
+import TodoHeader from "../../Componets/TodoHeader/TodoHeader";
+import Layout from "../../Componets/Layout/Layout";
+import {StorageChangeAlertWithStorageListener} from "../../Componets/StorageChangeAlert/StorageChangeAlert";
 import {useState} from "react";
 import {useDarkMode} from "../../Hooks/UseDarkMode/useDarkMode";
 import {useSearch} from "../../Hooks/UseSearch/useSearch";
 
-function App() {
+function HomePage() {
 
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
@@ -138,4 +138,4 @@ function App() {
     )
 }
 
-export default App;
+export default HomePage;
