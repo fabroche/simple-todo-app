@@ -37,6 +37,7 @@ function HomePage() {
         handleOnDeleteTodo,
         handleToggleTodoCompleted,
         handleOnCreateTodo,
+        onEditTodo,
         newTodoValue,
         setNewTodoValue,
     } = useTodos({setLoading, setError});
@@ -107,13 +108,15 @@ function HomePage() {
             >
                 {todo => (
                     <TodoItem
-                        key={todo.text}
+                        key={todo.id}
+                        id={todo.id}
                         text={todo.text}
                         completed={todo.completed}
                         darkMode={darkMode}
                         sincronizedItems={sincronizedItem}
                         handleOnDeleteTodo={handleOnDeleteTodo}
                         handleToggleTodoCompleted={handleToggleTodoCompleted}
+                        onEditTodo={onEditTodo}
                     />
                 )}
             </TodoList>

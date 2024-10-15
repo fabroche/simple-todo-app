@@ -45,6 +45,23 @@ input[type="checkbox"]:checked {
     accent-color: var(--primary);
 }
 
+.todoItem__actions-container {
+    display: flex;
+    gap: 6px;
+}
+
+.todoItem-editIcon {
+    width: 22px;
+    height: 22px;
+    transition: all .3s ease;
+}
+
+.todoItem-editIcon:hover {
+    cursor: pointer;
+    color: var(--primary);
+    scale: 1.05;
+}
+
 .todoItem-deleteIcon {
     width: 22px;
     height: 22px;
@@ -52,6 +69,7 @@ input[type="checkbox"]:checked {
 }
 
 .todoItem-deleteIcon:hover {
+    cursor: pointer;
     color: var(--danger);
     scale: 1.05;
 }

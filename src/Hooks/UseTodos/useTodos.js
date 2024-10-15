@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 
 function useTodos({setLoading, setError}) {
     // Estados
@@ -10,6 +10,8 @@ function useTodos({setLoading, setError}) {
     const totalTodos = todos.length
     const completedTodos = todos.filter(todo => todo.completed).length
 
+    // Generadores
+    const todoIdGenerator = useRef(idGenerator());
 
     // DOM Elements
     const createTodoButton = document.querySelector('.createTodoButton');
@@ -43,38 +45,59 @@ function useTodos({setLoading, setError}) {
     }, [sincronizedItem]);
 
 
-
-
-
-
     // Funciones
-    const handleToggleTodoCompleted = (text, completed) => {
+    function* idGenerator() {
+        let id = parseInt(localStorage.getItem('nextId'), 10) || 1
+
+        while (true) {
+            localStorage.setItem('nextId', JSON.stringify(id + 1));
+            yield id++;
+        }
+    }
+
+    const handleToggleTodoCompleted = (id, completed) => {
         const newTodos = [...todos]
         const todoIndex = newTodos.findIndex(
-            todo => todo.text === text
+            todo => todo.id === id
         )
         newTodos[todoIndex].completed = completed
         setTodos(newTodos)
     }
 
-    const handleOnDeleteTodo = (text) => {
+    const handleOnDeleteTodo = (id) => {
 
         const newTodos = [...todos]
         const todoIndex = newTodos.findIndex(
-            todo => todo.text === text
+            todo => todo.id === id
         )
         newTodos.splice(todoIndex, 1)
         setTodos(newTodos)
-
     }
 
     const handleOnCreateTodo = (e, text) => {
         e.preventDefault();
-        const newTodos = [{text, completed: false}, ...todos,];
+
+        const newTodos = [
+            {
+                id: todoIdGenerator.current.next().value,
+                text,
+                completed: false
+            },
+            ...todos,
+        ];
         setTodos(newTodos);
         setNewTodoValue('');
         createTodoButton.click()
         todoFilterActionAll.click()
+    }
+
+    function onEditTodo(id, editedTodo) {
+        const newTodos = [...todos]
+        const index = todos.findIndex(todo => todo.id === id);
+        if (index !== -1) {
+        newTodos[index] = {...todos[index], ...editedTodo}
+        setTodos(newTodos)
+        }
     }
 
     function sincronize() {
@@ -92,6 +115,7 @@ function useTodos({setLoading, setError}) {
         handleToggleTodoCompleted,
         handleOnDeleteTodo,
         handleOnCreateTodo,
+        onEditTodo
     }
 }
 
