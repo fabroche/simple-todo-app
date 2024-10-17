@@ -1,10 +1,18 @@
 import React, {useEffect, useRef, useState} from "react";
+import {useLocalStorage} from "../UseLocalStorage/useLocalStorage";
 
-function useTodos({setLoading, setError}) {
+function useTodos() {
     // Estados
-    const [todos, setTodos] = useState([]);
-    const [sincronizedItem, setSincronizedItem] = useState(true);
+    // const [todos, setTodos] = useState([]);
+    // const [sincronizedItem, setSincronizedItem] = useState(true);
     const [newTodoValue, setNewTodoValue] = useState("");
+
+    const {
+        item: todos,
+        saveItem: setTodos,
+        sincronizeItem: sincronizeTodos,
+        sincronizedItem,
+    } = useLocalStorage('todos', []);
 
     // Estados derivados
     const totalTodos = todos.length
@@ -23,27 +31,6 @@ function useTodos({setLoading, setError}) {
         await new Promise(resolve => setTimeout(resolve, 2000));
         return JSON.parse(localStorage.getItem('todos')) || []
     }
-
-    // fetchTodos
-    useEffect(() => {
-        async function getTodos() {
-            try {
-                setLoading(true)
-                const response = await getTodosLocalStorage()
-                setTodos(response)
-            } catch (error) {
-                setLoading(false)
-                setError(true)
-            } finally {
-                setLoading(false)
-                setSincronizedItem(true)
-            }
-        }
-
-        getTodos()
-        // console.log(await getTodosLocalStorage())
-    }, [sincronizedItem]);
-
 
     // Funciones
     function* idGenerator() {
@@ -104,7 +91,7 @@ function useTodos({setLoading, setError}) {
     }
 
     function sincronize() {
-        setSincronizedItem(false)
+        sincronizeTodos()
     }
 
     return {

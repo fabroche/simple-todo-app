@@ -26,9 +26,7 @@ function HomePage() {
     const {
         navigate,
         loading,
-        setLoading,
         error,
-        setError,
         darkMode,
         setDarkMode
     } = useContext(GlobalContext);
@@ -53,7 +51,7 @@ function HomePage() {
         onEditTodo,
         newTodoValue,
         setNewTodoValue,
-    } = useTodos({setLoading, setError});
+    } = useTodos();
 
     const {
         searchValue,

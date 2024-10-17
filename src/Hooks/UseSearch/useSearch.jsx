@@ -11,13 +11,13 @@ function useSearch({todos, loading}) {
         setFilteredTodos(getFilteredTodos())
     }, [searchValue]);
 
-    // Save in localStorage todos and update filteredTodos
-    useEffect(() => {
-        if (!loading) {
-            localStorage.setItem('todos', JSON.stringify(todos))
-        }
-        setFilteredTodos(getFilteredTodos())
-    }, [todos])
+    // // Save in localStorage todos and update filteredTodos
+    // useEffect(() => {
+    //     if (!loading) {
+    //         localStorage.setItem('todos', JSON.stringify(todos))
+    //     }
+    //     setFilteredTodos(getFilteredTodos())
+    // }, [todos])
 
     function getFilteredTodos() {
 
