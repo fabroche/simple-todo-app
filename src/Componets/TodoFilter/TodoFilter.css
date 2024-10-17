@@ -5,6 +5,10 @@
     gap: 8px;
 }
 
+.todo-filter-container button {
+    cursor: pointer;
+}
+
 .todo-filter__option {
     background: transparent;
     border: none;

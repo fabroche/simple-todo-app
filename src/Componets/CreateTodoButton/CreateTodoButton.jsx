@@ -1,19 +1,18 @@
 import './CreateTodoButton.css';
 
 function CreateTodoButton({
-                              isOpenModal,
-                              setIsOpenModal,
-                              showAnimaion
+                              showAnimaion,
+                              navigate
                           }) {
 
 
     const handleOnCLick = (e) => {
         e.preventDefault();
-        setIsOpenModal(!isOpenModal);
         e.target.classList.toggle("createTodoButton--active");
-        showAnimaion(".createTodoForm__input-container", "createTodoForm__input-container--active");
-        showAnimaion(".createTodoForm-input", "createTodoForm-input--active");
-        showAnimaion(".createTodoForm-container", "createTodoForm-container--active");
+        navigate('/new')
+        // showAnimaion(".createTodoForm__input-container", "createTodoForm__input-container--active");
+        // showAnimaion(".createTodoForm-input", "createTodoForm-input--active");
+        // showAnimaion(".createTodoForm-container", "createTodoForm-container--active");
     }
 
     return (

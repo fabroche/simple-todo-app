@@ -74,9 +74,7 @@ function useTodos({setLoading, setError}) {
         setTodos(newTodos)
     }
 
-    const handleOnCreateTodo = (e, text) => {
-        e.preventDefault();
-
+    const handleOnCreateTodo = (text) => {
         const newTodos = [
             {
                 id: todoIdGenerator.current.next().value,
@@ -87,17 +85,22 @@ function useTodos({setLoading, setError}) {
         ];
         setTodos(newTodos);
         setNewTodoValue('');
-        createTodoButton.click()
-        todoFilterActionAll.click()
+        // createTodoButton.click()
+        // todoFilterActionAll.click()
     }
 
-    function onEditTodo(id, editedTodo) {
+
+    function onEditTodo({id, newText}) {
+
         const newTodos = [...todos]
         const index = todos.findIndex(todo => todo.id === id);
+
         if (index !== -1) {
-        newTodos[index] = {...todos[index], ...editedTodo}
-        setTodos(newTodos)
+            newTodos[index] = {...todos[index], text:newText}
+            setTodos(newTodos)
         }
+        console.log('newTodos[index]=',newTodos[index])
+        console.log(todos)
     }
 
     function sincronize() {

@@ -16,17 +16,30 @@ import {EmptyTodos} from "../../Componets/EmptyTodos/EmptyTodos";
 import TodoHeader from "../../Componets/TodoHeader/TodoHeader";
 import Layout from "../../Componets/Layout/Layout";
 import {StorageChangeAlertWithStorageListener} from "../../Componets/StorageChangeAlert/StorageChangeAlert";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useDarkMode} from "../../Hooks/UseDarkMode/useDarkMode";
 import {useSearch} from "../../Hooks/UseSearch/useSearch";
+import {useNavigate} from "react-router-dom";
+import {GlobalContext} from "../../Context/AppGlobalContext/AppGlobalContext";
 
 function HomePage() {
+    const {
+        navigate,
+        loading,
+        setLoading,
+        error,
+        setError,
+        darkMode,
+        setDarkMode
+    } = useContext(GlobalContext);
 
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+
+    // const navigate = useNavigate()
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(false);
     const [isOpenModal, setIsOpenModal] = useState(false);
 
-    const {darkMode, setDarkMode} = useDarkMode()
+    // const {darkMode, setDarkMode} = useDarkMode()
 
     const {
         todos,
@@ -67,8 +80,7 @@ function HomePage() {
         <Layout loading={loading} darkMode={darkMode}>
             <TodoHeader>
                 <CreateTodoButton
-                    isOpenModal={isOpenModal}
-                    setIsOpenModal={setIsOpenModal}
+                    navigate={navigate}
                     showAnimaion={showAnimaion}
                 />
                 <TodoCounter
@@ -116,7 +128,7 @@ function HomePage() {
                         sincronizedItems={sincronizedItem}
                         handleOnDeleteTodo={handleOnDeleteTodo}
                         handleToggleTodoCompleted={handleToggleTodoCompleted}
-                        onEditTodo={onEditTodo}
+                        navigate={navigate}
                     />
                 )}
             </TodoList>
@@ -126,17 +138,17 @@ function HomePage() {
                 handleOnDeleteTodo={handleOnDeleteTodo}
             />
 
-            {isOpenModal &&
-                (
-                    <Modal>
-                        <CreateTodoForm
-                            darkMode={darkMode}
-                            handleOnCreateTodo={handleOnCreateTodo}
-                            newTodoValue={newTodoValue}
-                            setNewTodoValue={setNewTodoValue}
-                        />
-                    </Modal>
-                )}
+            {/*{isOpenModal &&*/}
+            {/*    (*/}
+            {/*        <Modal>*/}
+            {/*            <CreateTodoForm*/}
+            {/*                darkMode={darkMode}*/}
+            {/*                handleOnCreateTodo={handleOnCreateTodo}*/}
+            {/*                newTodoValue={newTodoValue}*/}
+            {/*                setNewTodoValue={setNewTodoValue}*/}
+            {/*            />*/}
+            {/*        </Modal>*/}
+            {/*    )}*/}
         </Layout>
     )
 }

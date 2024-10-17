@@ -1,10 +1,35 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Layout from "../../Componets/Layout/Layout";
+import {CreateTodoForm} from "../../Componets/CreateTodoForm/CreateTodoForm";
+import {GlobalContext} from "../../Context/AppGlobalContext/AppGlobalContext";
+import {useTodos} from "../../Hooks/UseTodos/useTodos";
 
 function NewTodoPage(props) {
+    const {
+        loading,
+        setLoading,
+        setError,
+        darkMode,
+        navigate
+    } = useContext(GlobalContext);
+
+    const {
+        handleOnCreateTodo,
+        newTodoValue,
+        setNewTodoValue
+    } = useTodos({setLoading,setError})
+
     return (
-        <Layout>
-            <h1>NewTodoPage</h1>
+        <Layout loading={loading} darkMode={darkMode}>
+            <CreateTodoForm
+                darkMode={darkMode}
+                submitEvent={(text) => handleOnCreateTodo(text)}
+                newTodoValue={newTodoValue}
+                setNewTodoValue={setNewTodoValue}
+                navigate={navigate}
+                formLabel={'Crea un nuevo'}
+                action={'create'}
+            />
         </Layout>
     );
 }

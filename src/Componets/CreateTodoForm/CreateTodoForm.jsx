@@ -1,33 +1,50 @@
 import './CreateTodoForm.css';
-import {VscNewFile} from "react-icons/vsc";
+import {VscEdit, VscNewFile, VscChromeClose} from "react-icons/vsc";
 
 function CreateTodoForm({
                             newTodoValue,
                             setNewTodoValue,
-                            handleOnCreateTodo,
-                            darkMode
+                            submitEvent,
+                            darkMode,
+                            navigate,
+                            formLabel,
+                            action
                         }) {
 
+    const submitButtonIcon = {
+        create: <VscNewFile className={`createTodoForm-icon`}/>,
+        edit: <VscEdit className={`createTodoForm-icon`}/>,
+    }
+    function onSubmit(e) {
+        e.preventDefault()
+        submitEvent(newTodoValue)
+        // navigate('/')
+    }
 
     return (
         <div className={"createTodoForm-container"}>
 
             <form
-                className={`createTodoForm__input-container ${darkMode ? 'createTodoForm__input-container--dark-mode' : 'createTodoForm__input-container--light-mode'}`}
-                onSubmit={(e) => handleOnCreateTodo(e, newTodoValue)}>
-                <label htmlFor="createTodoForm__input"><h2>Crea un nuevo <span
+                className={`createTodoForm__input-container ${darkMode ? 'createTodoForm__input-container--dark-mode' : 'createTodoForm__input-container--light-mode'} createTodoForm__input-container--active`}
+                onSubmit={(e) => onSubmit(e)}>
+                <VscChromeClose
+                    className="createTodoForm__input-container__closeBtn"
+                onClick={() => navigate('/')}
+                />
+                <label htmlFor="createTodoForm__input"><h2>{formLabel} <span
                     className="todoCounter-text--max">TODO</span></h2></label>
                 <input
-                    className={'createTodoForm-input'}
+                    className={'createTodoForm-input createTodoForm-input--active'}
                     type="text"
                     placeholder={"Create a new task"}
                     value={newTodoValue}
                     onChange={(e) => setNewTodoValue(e.target.value)}
+                    required
                 />
                 <button
                     type="submit"
                 >
-                    <VscNewFile className={`createTodoForm-icon`}/>
+                    {submitButtonIcon[action]}
                 </button>
             </form>
         </div>

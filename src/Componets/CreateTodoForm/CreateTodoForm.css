@@ -1,9 +1,4 @@
 .createTodoForm-container {
-    position: absolute;
-    bottom: 0;
-    top: 0;
-    right: 0;
-    left: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,6 +7,10 @@
     padding: 12px;
     gap: 12px;
     transition: all .3s ease;
+}
+
+.createTodoForm-container label h2 {
+    text-align: center;
 }
 
 .createTodoForm-container button[type="submit"] {
@@ -24,9 +23,10 @@
 }
 
 .createTodoForm__input-container {
+    position: relative;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 42px;
     justify-content: center;
     align-items: center;
     width: 0;
@@ -34,10 +34,30 @@
     opacity: 0;
     transform: translateY(-30px);
     width: 200px;
-    height: 150px;
+    height: 350px;
     padding: 6px 12px;
     border-radius: 6px;
     transition: all .3s ease;
+}
+
+
+.createTodoForm__input-container button {
+    cursor: pointer;
+}
+
+.createTodoForm__input-container__closeBtn {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    transition: all .3s ease;
+}
+
+.createTodoForm__input-container__closeBtn:hover {
+    color: var(--danger);
+    scale: 1.1;
 }
 
 .createTodoForm__input-container--dark-mode {
