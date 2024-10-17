@@ -51,13 +51,13 @@ function HomePage() {
         onEditTodo,
         newTodoValue,
         setNewTodoValue,
-    } = useTodos();
-
-    const {
         searchValue,
         setSearchValue,
         filteredTodos,
-        setFilteredTodos,
+        setFilteredTodos
+    } = useTodos();
+
+    const {
         filterReducerState,
         filterDispatch
     } = useSearch({todos, loading})

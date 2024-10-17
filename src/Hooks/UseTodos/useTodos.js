@@ -6,6 +6,8 @@ function useTodos() {
     // const [todos, setTodos] = useState([]);
     // const [sincronizedItem, setSincronizedItem] = useState(true);
     const [newTodoValue, setNewTodoValue] = useState("");
+    const [searchValue, setSearchValue] = useState("");
+    const [filteredTodos, setFilteredTodos] = useState([]);
 
     const {
         item: todos,
@@ -17,6 +19,18 @@ function useTodos() {
     // Estados derivados
     const totalTodos = todos.length
     const completedTodos = todos.filter(todo => todo.completed).length
+
+    let searchedTodos = []
+
+    if (!searchValue.length >= 1) {
+        searchedTodos = todos;
+    } else {
+        searchedTodos = todos.filter(todo => {
+            const todoText = todo.text.toLowerCase();
+            const searchText = searchValue.toLowerCase();
+            return todoText.includes(searchText);
+        });
+    }
 
     // Generadores
     const todoIdGenerator = useRef(idGenerator());
@@ -97,6 +111,10 @@ function useTodos() {
     return {
         todos,
         sincronizedItem,
+        searchValue,
+        setSearchValue,
+        filteredTodos: searchedTodos,
+        setFilteredTodos,
         sincronize,
         totalTodos,
         completedTodos,
