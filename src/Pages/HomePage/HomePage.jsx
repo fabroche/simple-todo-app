@@ -38,7 +38,6 @@ function HomePage() {
     const [isOpenModal, setIsOpenModal] = useState(false);
 
     // const {darkMode, setDarkMode} = useDarkMode()
-
     const {
         todos,
         totalTodos,
@@ -51,13 +50,13 @@ function HomePage() {
         onEditTodo,
         newTodoValue,
         setNewTodoValue,
-        searchValue,
-        setSearchValue,
-        filteredTodos,
-        setFilteredTodos
     } = useTodos();
 
     const {
+        searchValue,
+        setSearchValue,
+        filteredTodos,
+        setFilteredTodos,
         filterReducerState,
         filterDispatch
     } = useSearch({todos, loading})
