@@ -1,9 +1,9 @@
 import './CreateTodoForm.css';
 import {VscEdit, VscNewFile, VscChromeClose} from "react-icons/vsc";
+import {useState} from "react";
 
 function CreateTodoForm({
-                            newTodoValue,
-                            setNewTodoValue,
+                            defaultTodoText,
                             submitEvent,
                             darkMode,
                             navigate,
@@ -11,14 +11,18 @@ function CreateTodoForm({
                             action
                         }) {
 
+    const [newTodoValue, setNewTodoValue] = useState(defaultTodoText || '');
+
     const submitButtonIcon = {
         create: <VscNewFile className={`createTodoForm-icon`}/>,
         edit: <VscEdit className={`createTodoForm-icon`}/>,
     }
+
     function onSubmit(e) {
         e.preventDefault()
         submitEvent(newTodoValue)
-        // navigate('/')
+        setNewTodoValue('')
+        navigate('/')
     }
 
     return (
@@ -29,7 +33,7 @@ function CreateTodoForm({
                 onSubmit={(e) => onSubmit(e)}>
                 <VscChromeClose
                     className="createTodoForm__input-container__closeBtn"
-                onClick={() => navigate('/')}
+                    onClick={() => navigate('/')}
                 />
                 <label htmlFor="createTodoForm__input"><h2>{formLabel} <span
                     className="todoCounter-text--max">TODO</span></h2></label>

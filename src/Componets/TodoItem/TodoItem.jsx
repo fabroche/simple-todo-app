@@ -11,7 +11,7 @@ function TodoItem({
                       sincronizedItems,
                       handleToggleTodoCompleted,
                       handleOnDeleteTodo,
-                      navigate
+                      onEdit
                   }) {
 
 
@@ -27,7 +27,7 @@ function TodoItem({
             </input>
             <p className={`todoItem__text ${completed ? 'todoItem__text--completed' : ''}`}>{text}</p>
            <div className="todoItem__actions-container">
-               <VscEdit className="todoItem-editIcon" onClick={() => navigate(`/edit/${id}/`)}
+               <VscEdit className="todoItem-editIcon" onClick={onEdit}
                />
                <VscArchive className="todoItem-deleteIcon" onClick={() => sincronizedItems
                    ? handleOnDeleteTodo(id)

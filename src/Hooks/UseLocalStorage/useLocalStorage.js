@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {GlobalContext} from "../../Context/AppGlobalContext/AppGlobalContext";
 
 function useLocalStorage(itemName, initialValue) {
-    const [state, dispatch] = React.useReducer(reducer, initialState({ initialValue }));
+    const [state, dispatch] = React.useReducer(reducer, initialState({initialValue}));
     const {
         sincronizedItem,
         error,
@@ -15,6 +16,9 @@ function useLocalStorage(itemName, initialValue) {
         payload: error,
     });
 
+    const onLoading = () => dispatch({
+        type: actionTypes.loading,
+    });
     const onSuccess = (item) => dispatch({
         type: actionTypes.success,
         payload: item,
@@ -41,12 +45,12 @@ function useLocalStorage(itemName, initialValue) {
                 } else {
                     parsedItem = JSON.parse(localStorageItem);
                 }
-
                 onSuccess(parsedItem);
-            } catch(error) {
+            } catch (error) {
                 onError(error);
             }
-        }, 1500);
+        }, 400);
+
     }, [sincronizedItem]);
 
     const saveItem = (newItem) => {
@@ -54,7 +58,7 @@ function useLocalStorage(itemName, initialValue) {
             const stringifiedItem = JSON.stringify(newItem);
             localStorage.setItem(itemName, stringifiedItem);
             onSave(newItem);
-        } catch(error) {
+        } catch (error) {
             onError(error);
         }
     };
@@ -73,7 +77,7 @@ function useLocalStorage(itemName, initialValue) {
     };
 }
 
-const initialState = ({ initialValue }) => ({
+const initialState = ({initialValue}) => ({
     sincronizedItem: true,
     error: false,
     loading: true,
@@ -85,12 +89,17 @@ const actionTypes = {
     success: 'SUCCESS',
     save: 'SAVE',
     sincronize: 'SINCRONIZE',
+    loading: 'LOADING'
 };
 
 const reducerObject = (state, payload) => ({
     [actionTypes.error]: {
         ...state,
         error: true,
+    },
+    [actionTypes.loading]: {
+        ...state,
+        loading: true,
     },
     [actionTypes.success]: {
         ...state,
@@ -114,4 +123,4 @@ const reducer = (state, action) => {
     return reducerObject(state, action.payload)[action.type] || state;
 };
 
-export { useLocalStorage };
+export {useLocalStorage};

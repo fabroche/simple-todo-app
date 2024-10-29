@@ -25,8 +25,6 @@ import {GlobalContext} from "../../Context/AppGlobalContext/AppGlobalContext";
 function HomePage() {
     const {
         navigate,
-        loading,
-        error,
         darkMode,
         setDarkMode
     } = useContext(GlobalContext);
@@ -40,16 +38,14 @@ function HomePage() {
     // const {darkMode, setDarkMode} = useDarkMode()
     const {
         todos,
+        loading,
+        error,
         totalTodos,
         sincronize,
         sincronizedItem,
         completedTodos,
         handleOnDeleteTodo,
         handleToggleTodoCompleted,
-        handleOnCreateTodo,
-        onEditTodo,
-        newTodoValue,
-        setNewTodoValue,
     } = useTodos();
 
     const {
@@ -125,7 +121,14 @@ function HomePage() {
                         sincronizedItems={sincronizedItem}
                         handleOnDeleteTodo={handleOnDeleteTodo}
                         handleToggleTodoCompleted={handleToggleTodoCompleted}
-                        navigate={navigate}
+                        onEdit={() => {
+                            navigate(
+                                `/edit/${todo.id}/`,
+                                {
+                                    state: {todo: todo}
+                                }
+                            )
+                        }}
                     />
                 )}
             </TodoList>

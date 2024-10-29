@@ -5,13 +5,14 @@ function useTodos() {
     // Estados
     // const [todos, setTodos] = useState([]);
     // const [sincronizedItem, setSincronizedItem] = useState(true);
-    const [newTodoValue, setNewTodoValue] = useState("");
 
     const {
         item: todos,
         saveItem: setTodos,
         sincronizeItem: sincronizeTodos,
         sincronizedItem,
+        loading,
+        error
     } = useLocalStorage('todos', []);
 
     // Estados derivados
@@ -65,7 +66,6 @@ function useTodos() {
             ...todos,
         ];
         setTodos(newTodos);
-        setNewTodoValue('');
         // createTodoButton.click()
         // todoFilterActionAll.click()
     }
@@ -84,12 +84,19 @@ function useTodos() {
         console.log(todos)
     }
 
+    function getTodoById(id) {
+        const todoIndex = todos.findIndex(todo => todo.id === id)
+        return todos[todoIndex]
+    }
+
     function sincronize() {
         sincronizeTodos()
     }
 
     return {
         todos,
+        loading,
+        error,
         sincronizedItem,
         // searchValue,
         // setSearchValue,
@@ -98,12 +105,11 @@ function useTodos() {
         sincronize,
         totalTodos,
         completedTodos,
-        newTodoValue,
-        setNewTodoValue,
         handleToggleTodoCompleted,
         handleOnDeleteTodo,
         handleOnCreateTodo,
-        onEditTodo
+        onEditTodo,
+        getTodoById
     }
 }
 

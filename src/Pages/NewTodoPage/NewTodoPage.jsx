@@ -7,25 +7,19 @@ import {useTodos} from "../../Hooks/UseTodos/useTodos";
 function NewTodoPage(props) {
     const {
         loading,
-        setLoading,
-        setError,
         darkMode,
         navigate
     } = useContext(GlobalContext);
 
     const {
         handleOnCreateTodo,
-        newTodoValue,
-        setNewTodoValue
-    } = useTodos({setLoading,setError})
+    } = useTodos()
 
     return (
         <Layout loading={loading} darkMode={darkMode}>
             <CreateTodoForm
                 darkMode={darkMode}
                 submitEvent={(text) => handleOnCreateTodo(text)}
-                newTodoValue={newTodoValue}
-                setNewTodoValue={setNewTodoValue}
                 navigate={navigate}
                 formLabel={'Crea un nuevo'}
                 action={'create'}
