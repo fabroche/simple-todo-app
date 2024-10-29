@@ -19,7 +19,7 @@ import {StorageChangeAlertWithStorageListener} from "../../Componets/StorageChan
 import {useContext, useState} from "react";
 import {useDarkMode} from "../../Hooks/UseDarkMode/useDarkMode";
 import {useSearch} from "../../Hooks/UseSearch/useSearch";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import {GlobalContext} from "../../Context/AppGlobalContext/AppGlobalContext";
 
 function HomePage() {
@@ -29,13 +29,8 @@ function HomePage() {
         setDarkMode
     } = useContext(GlobalContext);
 
-
-    // const navigate = useNavigate()
-    // const [loading, setLoading] = useState(true);
-    // const [error, setError] = useState(false);
     const [isOpenModal, setIsOpenModal] = useState(false);
 
-    // const {darkMode, setDarkMode} = useDarkMode()
     const {
         todos,
         loading,
